@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Fatma Zehra & Mehmet Bedri | Davetiye</title>
+  <meta name="description" content="Fatma Zehra ve Mehmet Bedri'nin düğün ve kına gecesi davetiyesi" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f9f4eb;
+      --ivory: #fffdfa;
+      --gold: #c5a56f;
+      --gold-soft: #ddc393;
+      --blush: #f7e8e8;
+      --sage: #dce7dc;
+      --text: #51443d;
+      --radius: 28px;
+      --shadow: 0 14px 38px rgba(88, 69, 44, 0.14);
+      --line: rgba(197, 165, 111, 0.33);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--text);
+      background: #efe4e9;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body.locked {
+      overflow: hidden;
+      height: 100dvh;
+    }
+
+
+    .content-floral {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    body.ready .content-floral {
+      opacity: 1;
+    }
+
+    .content-floral img {
+      position: absolute;
+      width: clamp(92px, 20vw, 220px);
+      height: auto;
+      opacity: 0.5;
+      filter: drop-shadow(0 6px 12px rgba(112, 86, 74, 0.15));
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .cf1 { top: -18px; left: -22px; transform: rotate(-8deg); }
+    .cf2 { top: 8%; right: -34px; transform: rotate(18deg); }
+    .cf3 { top: 28%; left: -44px; transform: rotate(-22deg); }
+    .cf4 { top: 43%; right: -42px; transform: rotate(26deg); }
+    .cf5 { bottom: 35%; left: -30px; transform: rotate(12deg); }
+    .cf6 { bottom: 24%; right: -40px; transform: rotate(-16deg); }
+    .cf7 { bottom: 8%; left: -34px; transform: rotate(-14deg); }
+    .cf8 { bottom: -14px; right: -26px; transform: rotate(10deg); }
+
+
+    #envelope-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background: #efe4e9;
+      display: grid;
+      place-items: center;
+      padding: calc(env(safe-area-inset-top) + 14px) 14px calc(env(safe-area-inset-bottom) + 14px);
+      transition: opacity 1s ease, visibility 1s ease;
+      overflow: hidden;
+    }
+
+    #envelope-screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("./Foto1.jpeg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #envelope-screen.opened {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .envelope-stage {
+      position: relative;
+      width: 100%;
+      max-width: 760px;
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+      perspective: 1300px;
+      z-index: 1;
+    }
+
+    .corner-flower {
+      position: absolute;
+      width: clamp(130px, 30vw, 250px);
+      height: auto;
+      z-index: 8;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 8px 14px rgba(98, 76, 67, 0.16));
+    }
+
+    .corner-flower.left-top {
+      top: clamp(2px, 0.8vw, 12px);
+      left: clamp(-56px, -6.8vw, -24px);
+    }
+
+    .corner-flower.right-bottom {
+      right: clamp(-72px, -8.6vw, -34px);
+      bottom: clamp(-56px, -6.5vw, -24px);
+    }
+
+    .opening-hint {
+      margin: 0;
+      font-size: clamp(0.86rem, 2.7vw, 1.05rem);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #7d6a60;
+      font-weight: 700;
+      transform: translateY(-10px);
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.95),
+        0 0 20px rgba(255, 255, 255, 0.82),
+        0 1px 3px rgba(255, 255, 255, 0.9);
+    }
+
+    .envelope {
+      position: relative;
+      width: min(92vw, 700px);
+      aspect-ratio: 1.55 / 1;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(170, 146, 115, 0.06) 0 1px, transparent 2px),
+        radial-gradient(circle at 78% 82%, rgba(170, 146, 115, 0.05) 0 1px, transparent 2px),
+        #f8f4ec;
+      background-size: 34px 34px, 28px 28px, auto;
+      border: 1px solid rgba(180, 160, 130, 0.28);
+      box-shadow: 0 14px 34px rgba(92, 72, 58, 0.15);
+      cursor: pointer;
+    }
+
+
+    .envelope-face {
+      position: absolute;
+      inset: 0;
+      background: #f8f4ec;
+      z-index: 1;
+    }
+
+
+    /* alt ana gövde */
+    .fold-bottom {
+      box-shadow: inset 0 12px 20px rgba(0,0,0,0.06);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 60%;
+      background: linear-gradient(180deg, #f2ece2 0%, #e2d8c9 100%);
+      clip-path: polygon(0 100%, 50% 14%, 100% 100%);
+      z-index: 3;
+    }
+
+    /* sol ön kat */
+    .fold-left {
+      box-shadow: inset -12px 0 18px rgba(0,0,0,0.06);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(135deg, #f7f3eb 0%, #ebe3d7 100%);
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+      z-index: 4;
+    }
+
+    /* sağ ön kat */
+    .fold-right {
+      box-shadow: inset 12px 0 18px rgba(0,0,0,0.06);
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(225deg, #f7f3eb 0%, #ebe3d7 100%);
+      clip-path: polygon(100% 0, 0 50%, 100% 100%);
+      z-index: 4;
+    }
+
+    /* üst kapak */
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 52%;
+      background: linear-gradient(180deg, #f5f1e8 0%, #e2d8c9 100%);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      z-index: 5;
+      transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+      border-bottom: 1px solid rgba(171, 155, 132, 0.5);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    }
+
+    .flap::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 140px;
+      height: 15px;
+      transform: translateX(-50%);
+      border-bottom: 1px solid rgba(167, 152, 130, 0.48);
+      border-radius: 0 0 22px 22px;
+      background: linear-gradient(180deg, #f2ece1 0%, #e9e0d2 100%);
+    }
+
+    /* mühür */
+    .seal-btn {
+      position: absolute;
+      left: 50%;
+      top: 53%;
+      transform: translate(-50%, -50%) scale(1);
+      width: clamp(86px, 20vw, 116px);
+      height: clamp(86px, 20vw, 116px);
+      z-index: 6;
+      margin: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      padding: 0;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: drop-shadow(0 6px 10px rgba(63, 53, 45, 0.18));
+    }
+
+    .seal-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .seal-btn:active {
+      transform: translate(-50%, -50%) scale(0.97);
+    }
+
+    .envelope-front {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+
+    .note-paper {
+      position: absolute;
+      left: 50%;
+      top: 53%;
+      width: min(78vw, 520px);
+      min-height: 140px;
+      transform: translate(-50%, 55%);
+      opacity: 0;
+      z-index: 2;
+      border: 1px solid rgba(178, 163, 139, 0.36);
+      background:
+        linear-gradient(180deg, rgba(255, 252, 247, 0.97) 0%, rgba(248, 240, 228, 0.98) 100%),
+        repeating-linear-gradient(0deg, rgba(170, 150, 126, 0.035) 0 1px, transparent 1px 7px);
+      box-shadow: 0 12px 26px rgba(112, 89, 66, 0.2);
+      padding: clamp(16px, 3vw, 24px);
+      text-align: center;
+      transition: transform 1.05s cubic-bezier(0.2, 0.75, 0.2, 1), opacity 0.85s ease;
+      pointer-events: none;
+    }
+
+    .note-paper p {
+      margin: 0;
+      color: #6e5a4a;
+      font-size: clamp(1rem, 2.8vw, 1.3rem);
+      line-height: 1.55;
+    }
+
+    .envelope-front .seal-btn {
+      pointer-events: auto;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(178deg);
+    }
+
+    .envelope.open .note-paper {
+  transform: translate(-50%, -100%);
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .envelope.open .note-paper {
+    transform: translate(-50%, -136%);
+  }
+}
+
+    .envelope.open .envelope-front {
+      opacity: 0;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(980px, 92vw);
+      margin: 0 auto;
+      padding: calc(env(safe-area-inset-top) + 22px) 0 calc(env(safe-area-inset-bottom) + 36px);
+      opacity: 0;
+      transform: translateY(44px) scale(0.82);
+      transform-origin: 50% 24%;
+      clip-path: inset(40% 22% 46% 22% round 18px);
+      filter: blur(6px);
+      transition:
+        opacity 0.95s ease,
+        transform 1.05s cubic-bezier(0.2, 0.75, 0.2, 1),
+        clip-path 1.05s cubic-bezier(0.2, 0.75, 0.2, 1),
+        filter 0.95s ease;
+    }
+
+    body.ready main {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      clip-path: inset(0 0 0 0 round 0);
+      filter: blur(0);
+    }
+
+    .section {
+      background: linear-gradient(180deg, rgba(255, 253, 249, 0.9) 0%, rgba(255, 250, 242, 0.85) 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: none;
+      padding: 26px 22px;
+      margin: 18px 0;
+      backdrop-filter: blur(3px);
+    }
+
+    .section.reveal {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    .section.reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+
+    .title-script {
+      margin: 0;
+      font-family: "Parisienne", cursive;
+      font-size: clamp(2.4rem, 10.5vw, 4.6rem);
+      text-align: center;
+      color: #8a653b;
+      line-height: 1;
+    }
+
+    .subtitle {
+      margin: 8px 0 18px;
+      text-align: center;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      color: #8e7555;
+    }
+
+    .invite-line {
+      margin: 14px auto 0;
+      text-align: center;
+      font-size: clamp(1.2rem, 4.6vw, 1.46rem);
+      max-width: 32ch;
+    }
+
+    .detail {
+      margin: 16px auto;
+      text-align: center;
+      font-size: clamp(1.05rem, 4.4vw, 1.34rem);
+      line-height: 1.52;
+    }
+
+    .detail strong {
+      color: #7f5f39;
+      font-weight: 600;
+    }
+
+    .map-link {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: #89663a;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(137, 102, 58, 0.56);
+      padding-bottom: 2px;
+    }
+
+    .countdown-wrap {
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .time-box {
+      border-radius: 16px;
+      border: 1px solid rgba(197, 165, 111, 0.36);
+      background: rgba(255, 252, 246, 0.85);
+      padding: 10px 6px;
+      box-shadow: none;
+    }
+
+    .time-box b {
+      display: block;
+      font-size: clamp(1.45rem, 7vw, 2rem);
+      color: #825f33;
+      line-height: 1;
+    }
+
+    .time-box span {
+      font-size: 0.86rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #8f7756;
+    }
+
+    .section-title {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(2rem, 8.7vw, 3.2rem);
+      font-family: "Parisienne", cursive;
+      color: #865e33;
+    }
+
+    .icon-line {
+      text-align: center;
+      font-size: 1.1rem;
+      margin: 4px 0 12px;
+      color: #ab8a5c;
+      letter-spacing: 0.2em;
+    }
+
+    .rsvp-buttons {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .rsvp-form {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .rsvp-input {
+      width: 100%;
+      border: 1px solid rgba(197, 165, 111, 0.42);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.76);
+      color: #674f39;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.03rem;
+      padding: 12px 14px;
+    }
+
+    .rsvp-input:focus {
+      outline: 2px solid rgba(197, 165, 111, 0.42);
+      outline-offset: 1px;
+    }
+
+    .rsvp-btn {
+      border: 1px solid rgba(197, 165, 111, 0.48);
+      background: linear-gradient(180deg, #fffefb 0%, #fff3de 100%);
+      color: #7a5730;
+      border-radius: 999px;
+      padding: 13px 16px;
+      font-size: 1.1rem;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .rsvp-btn:active,
+    .rsvp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: none;
+    }
+
+    .thanks {
+      text-align: center;
+      margin-top: 13px;
+      min-height: 1.5em;
+      color: #845f34;
+      font-size: 1.06rem;
+    }
+
+    .rsvp-help {
+      margin-top: 10px;
+      text-align: center;
+      color: #8a7355;
+      font-size: 0.92rem;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .calendar-card {
+      border: 1px solid rgba(197, 165, 111, 0.36);
+      border-radius: 16px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(255, 252, 246, 0.85) 0%, rgba(255, 249, 240, 0.96) 100%);
+      box-shadow: none;
+    }
+
+    .calendar-name {
+      margin: 0;
+      font-size: 1.25rem;
+      color: #77542f;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .calendar-meta {
+      margin: 6px 0 12px;
+      text-align: center;
+      color: #81674a;
+      font-size: 1rem;
+    }
+
+    .calendar-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .calendar-btn {
+      border: 1px solid rgba(197, 165, 111, 0.44);
+      border-radius: 999px;
+      padding: 9px 12px;
+      text-align: center;
+      text-decoration: none;
+      color: #7a5730;
+      background: #fffaf0;
+      font-size: 0.96rem;
+      font-weight: 600;
+      font-family: "Cormorant Garamond", serif;
+      cursor: pointer;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .gallery-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      height: auto;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid rgba(197, 165, 111, 0.3);
+      box-shadow: none;
+      transform: translateY(0);
+      transition: transform 0.35s ease;
+    }
+
+    .gallery-photo:hover {
+      transform: translateY(-2px);
+    }
+
+    .couple-message {
+      text-align: center;
+      font-size: clamp(1.06rem, 4.4vw, 1.24rem);
+      line-height: 1.7;
+      max-width: 56ch;
+      margin: 0 auto;
+      color: #5b4a3f;
+    }
+
+    .music-toggle {
+      display: none;
+    }
+
+    #confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 25;
+    }
+
+    @media (min-width: 680px) {
+      .content-floral img {
+        width: clamp(120px, 14vw, 250px);
+      }
+
+      #envelope-screen {
+        padding: 24px;
+      }
+
+      .envelope {
+        width: min(84vw, 760px);
+      }
+
+      .corner-flower {
+        width: clamp(170px, 18vw, 280px);
+      }
+
+      .section {
+        padding: 34px 36px;
+      }
+
+      .rsvp-buttons {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .calendar-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body class="locked">
+  <section id="envelope-screen" aria-label="Davet zarfı">
+    <div class="envelope-stage">
+      <p class="opening-hint">Davetiyeyi açmak için zarfa tıklayınz</p>
+      <img class="corner-flower left-top" src="./cicek1.png" alt="" aria-hidden="true" />
+      <img class="corner-flower right-bottom" src="./cicek2.png" alt="" aria-hidden="true" />
+      <div id="envelope" class="envelope" role="button" tabindex="0" aria-label="Zarfı aç">
+        <div class="envelope-face"></div>
+        <div class="fold fold-left"></div>
+        <div class="fold fold-right"></div>
+        <div class="fold fold-bottom"></div>
+        <div class="flap"></div>
+        <article class="note-paper" aria-hidden="true">
+          <p>
+            Sizleri aramizda gormekten mutluluk duyariz.<br />
+            Fatma Zehra &amp; Mehmet Bedri.
+          </p>
+        </article>
+        <div class="envelope-front">
+          <button id="openBtn" class="seal-btn" aria-label="Davetiyeyi aç">
+            <img src="./muhur.png" alt="Mum mühür" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="content-floral" aria-hidden="true">
+    <img class="cf1" src="./cicek3.png" alt="" />
+    <img class="cf2" src="./cicek3.png" alt="" />
+    <img class="cf3" src="./cicek3.png" alt="" />
+    <img class="cf4" src="./cicek3.png" alt="" />
+    <img class="cf5" src="./cicek3.png" alt="" />
+    <img class="cf6" src="./cicek3.png" alt="" />
+    <img class="cf7" src="./cicek3.png" alt="" />
+    <img class="cf8" src="./cicek3.png" alt="" />
+  </div>
+
+  <main id="content" aria-live="polite">
+    <section class="section reveal">
+      <h1 class="title-script">Fatma Zehra &amp; Mehmet Bedri</h1>
+      <p class="subtitle">Düğün Davetiyesi</p>
+
+      <p class="detail"><strong>Tarih &amp; Saat:</strong><br />27.06.2026, 19:00</p>
+      <p class="detail">
+        <strong>Lokasyon:</strong><br />
+        S Class Hotel Gaziantep<br />
+        Çırağan Düğün Salonu<br />
+        <a class="map-link" href="https://maps.app.goo.gl/XEAYcUzk7FALmPFHA?g_st=ic" target="_blank" rel="noopener noreferrer">📍 Haritada aç</a>
+      </p>
+      <p class="invite-line">“Düğünümüze davetlisiniz”</p>
+
+      <div class="countdown-wrap" aria-label="Düğüne geri sayım">
+        <p class="subtitle" style="margin-bottom: 0;">Büyük güne kalan</p>
+        <div class="countdown-grid" id="countdown">
+          <div class="time-box"><b id="days">00</b><span>Gün</span></div>
+          <div class="time-box"><b id="hours">00</b><span>Saat</span></div>
+          <div class="time-box"><b id="minutes">00</b><span>Dakika</span></div>
+          <div class="time-box"><b id="seconds">00</b><span>Saniye</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="section-title">Kına Gecesi</h2>
+      <p class="icon-line">✿ ❋ ✿</p>
+      <p class="detail"><strong>Tarih &amp; Saat:</strong><br />20 Haziran 2026, 19:00</p>
+      <p class="detail">
+        <strong>Konum:</strong><br />
+        Bella Wedding Antares Ankara<br />
+        <a class="map-link" href="https://maps.app.goo.gl/d1KbbRqa5YpXTrBc9?g_st=ic" target="_blank" rel="noopener noreferrer">📍 Haritada aç</a>
+      </p>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="section-title">Katılım Durumu</h2>
+      <form id="rsvpForm" class="rsvp-form" autocomplete="on">
+        <input id="guestName" class="rsvp-input" type="text" name="name" placeholder="Ad Soyad" required />
+        <input id="guestCount" class="rsvp-input" type="number" name="guestCount" placeholder="Kişi sayısı" min="1" required />
+      </form>
+      <div class="rsvp-buttons" role="group" aria-label="Katılım yanıtı">
+        <button class="rsvp-btn" data-answer="Geliyorum">✅ Geliyorum</button>
+        <button class="rsvp-btn" data-answer="Gelmiyorum">❌ Gelmiyorum</button>
+      </div>
+      <p class="rsvp-help">Yanıtınız canlı olarak kaydedilir.</p>
+      <div id="thanks" class="thanks" aria-live="polite"></div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="section-title">Takvime ekle</h2>
+      <p class="icon-line">✦ ✿ ✦</p>
+      <div class="calendar-grid" id="calendarGrid"></div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="section-title">Fotoğraf Albümü</h2>
+      <p class="icon-line">❀ ❋ ❀</p>
+      <div class="gallery-grid" aria-label="Çifte ait fotoğraflar">
+        <img class="gallery-photo" src="./1.JPG" alt="Fotoğraf 1" loading="lazy" />
+        <img class="gallery-photo" src="./2.JPG" alt="Fotoğraf 2" loading="lazy" />
+        <img class="gallery-photo" src="./3.jpg" alt="Fotoğraf 3" loading="lazy" />
+        <img class="gallery-photo" src="./4.jpg" alt="Fotoğraf 4" loading="lazy" />
+        <img class="gallery-photo" src="./5.jpg" alt="Fotoğraf 5" loading="lazy" />
+        <img class="gallery-photo" src="./6.jpg" alt="Fotoğraf 6" loading="lazy" />
+        <img class="gallery-photo" src="./7.jpg" alt="Fotoğraf 7" loading="lazy" />
+        <img class="gallery-photo" src="./8.JPG" alt="Fotoğraf 8" loading="lazy" />
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="section-title">Çiftten mesaj</h2>
+      <p class="couple-message">
+        Hayatlarımızın en güzel “evet”ine adım atarken, bu anı bizim için en kıymetli olan sizlerle paylaşmak istiyoruz.
+        Sevgiyle başladığımız bu yolculukta, yanımızda olmanız mutluluğumuzu tamamlayacak.
+        Bu özel gecede birlikte gülmek, hissetmek ve anılar biriktirmek için sizi aramızda görmek bizim için çok değerli 💫
+      </p>
+    </section>
+  </main>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <script>
+    const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbxBKbIhLRi6ybdwnpvR0n7OVhC9cGznaSi2UYHQ9_h5J9Z91P2eXdG1SYv8QZ6H3_fQSQ/exec";
+
+    const eventData = {
+      wedding: {
+        title: "Fatma Zehra & Mehmet Bedri Dugun",
+        location: "S Class Hotel Gaziantep - Ciragan Dugun Salonu",
+        description: "Fatma Zehra & Mehmet Bedri dugun daveti",
+        startISO: "2026-06-27T19:00:00+03:00",
+        endISO: "2026-06-27T23:00:00+03:00"
+      },
+      kina: {
+        title: "Fatma Zehra & Mehmet Bedri Kina Gecesi",
+        location: "Bella Wedding Antares Ankara",
+        description: "Fatma Zehra & Mehmet Bedri kina gecesi",
+        startISO: "2026-06-20T19:00:00+03:00",
+        endISO: "2026-06-20T23:00:00+03:00"
+      }
+    };
+
+    const calendarGrid = document.getElementById("calendarGrid");
+
+    function toGoogleDate(isoString) {
+      return new Date(isoString).toISOString().replace(/-|:|\.\d{3}/g, "");
+    }
+
+    function makeGoogleCalendarUrl(eventInfo) {
+      const start = toGoogleDate(eventInfo.startISO);
+      const end = toGoogleDate(eventInfo.endISO);
+      const params = new URLSearchParams({
+        action: "TEMPLATE",
+        text: eventInfo.title,
+        dates: `${start}/${end}`,
+        details: eventInfo.description,
+        location: eventInfo.location,
+        ctz: "Europe/Istanbul"
+      });
+      return `https://calendar.google.com/calendar/render?${params.toString()}`;
+    }
+
+    function toICSDate(isoString) {
+      return new Date(isoString).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    }
+
+    function escapeICS(text) {
+      return text.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+    }
+
+    function createICSContent(eventInfo) {
+      return [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//FatmaZehraMehmetBedri//Davetiye//TR",
+        "CALSCALE:GREGORIAN",
+        "BEGIN:VEVENT",
+        `UID:${crypto.randomUUID()}@davetiye.local`,
+        `DTSTAMP:${toICSDate(new Date().toISOString())}`,
+        `DTSTART:${toICSDate(eventInfo.startISO)}`,
+        `DTEND:${toICSDate(eventInfo.endISO)}`,
+        `SUMMARY:${escapeICS(eventInfo.title)}`,
+        `DESCRIPTION:${escapeICS(eventInfo.description)}`,
+        `LOCATION:${escapeICS(eventInfo.location)}`,
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+    }
+
+    function downloadAppleCalendar(eventKey) {
+      const eventInfo = eventData[eventKey];
+      const content = createICSContent(eventInfo);
+      const blob = new Blob([content], { type: "text/calendar;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${eventKey}-etkinlik.ics`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(link.href), 500);
+    }
+
+    function renderCalendarButtons() {
+      const cards = [
+        {
+          key: "kina",
+          name: "Kına Gecesi",
+          meta: "20 Haziran 2026, 19:00"
+        },
+        {
+          key: "wedding",
+          name: "Düğün",
+          meta: "27 Haziran 2026, 19:00"
+        }
+      ];
+
+      calendarGrid.innerHTML = cards
+        .map((card) => {
+          const gcalUrl = makeGoogleCalendarUrl(eventData[card.key]);
+          return `
+            <article class="calendar-card">
+              <h3 class="calendar-name">${card.name}</h3>
+              <p class="calendar-meta">${card.meta}</p>
+              <div class="calendar-actions">
+                <a class="calendar-btn" href="${gcalUrl}" target="_blank" rel="noopener noreferrer">Google Takvim</a>
+                <button class="calendar-btn" type="button" data-ics="${card.key}">Apple Takvim</button>
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+
+      calendarGrid.querySelectorAll("[data-ics]").forEach((btn) => {
+        btn.addEventListener("click", () => downloadAppleCalendar(btn.dataset.ics));
+      });
+    }
+
+    renderCalendarButtons();
+
+    const envelope = document.getElementById("envelope");
+    const envelopeScreen = document.getElementById("envelope-screen");
+    const openBtn = document.getElementById("openBtn");
+
+    function openEnvelope() {
+      if (envelope.classList.contains("open")) return;
+      envelope.classList.add("open");
+
+      const main = document.getElementById("content");
+      main.style.transitionDelay = "0.52s";
+
+      setTimeout(() => {
+        envelopeScreen.classList.add("opened");
+        document.body.classList.remove("locked");
+        document.body.classList.add("ready");
+      }, 1750);
+    }
+
+    openBtn.addEventListener("click", openEnvelope);
+    envelope.addEventListener("click", (e) => {
+      if (e.target !== openBtn) openEnvelope();
+    });
+    envelope.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openEnvelope();
+      }
+    });
+
+    const revealTargets = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14 }
+    );
+    revealTargets.forEach((el) => observer.observe(el));
+
+    const weddingDate = new Date("2026-06-27T19:00:00+03:00");
+    const dayEl = document.getElementById("days");
+    const hourEl = document.getElementById("hours");
+    const minEl = document.getElementById("minutes");
+    const secEl = document.getElementById("seconds");
+
+    function renderCountdown() {
+      const now = new Date();
+      const diff = weddingDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        dayEl.textContent = "00";
+        hourEl.textContent = "00";
+        minEl.textContent = "00";
+        secEl.textContent = "00";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      dayEl.textContent = String(days).padStart(2, "0");
+      hourEl.textContent = String(hours).padStart(2, "0");
+      minEl.textContent = String(minutes).padStart(2, "0");
+      secEl.textContent = String(seconds).padStart(2, "0");
+    }
+
+    renderCountdown();
+    setInterval(renderCountdown, 1000);
+
+    const thanks = document.getElementById("thanks");
+    const rsvpForm = document.getElementById("rsvpForm");
+    const guestNameInput = document.getElementById("guestName");
+    const guestCountInput = document.getElementById("guestCount");
+    const rsvpButtons = document.querySelectorAll(".rsvp-btn");
+    const confettiCanvas = document.getElementById("confetti");
+    const ctx = confettiCanvas.getContext("2d");
+    let confettiParticles = [];
+    let confettiAnimation;
+
+    function resizeCanvas() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+
+    function launchConfetti() {
+      resizeCanvas();
+      confettiParticles = Array.from({ length: 120 }, () => ({
+        x: Math.random() * confettiCanvas.width,
+        y: -20 - Math.random() * confettiCanvas.height * 0.35,
+        r: 3 + Math.random() * 5,
+        vx: -1 + Math.random() * 2,
+        vy: 1.6 + Math.random() * 3.3,
+        rot: Math.random() * Math.PI,
+        vr: -0.2 + Math.random() * 0.4,
+        color: ["#c5a56f", "#f3d7bc", "#f6e4d1", "#e9c7d4", "#dbe8d8"][Math.floor(Math.random() * 5)]
+      }));
+
+      cancelAnimationFrame(confettiAnimation);
+      function animate() {
+        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        confettiParticles.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vr;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.r, -p.r * 0.6, p.r * 1.8, p.r * 1.2);
+          ctx.restore();
+        });
+
+        confettiParticles = confettiParticles.filter((p) => p.y < confettiCanvas.height + 22);
+        if (confettiParticles.length) {
+          confettiAnimation = requestAnimationFrame(animate);
+        } else {
+          ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        }
+      }
+
+      animate();
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    async function submitRSVP(payload) {
+      if (!RSVP_ENDPOINT.includes("YOUR_DEPLOYMENT_ID")) {
+        return { ok: false, message: "RSVP endpointi ayarlanmadı" };
+      }
+
+      const jsonAttempt = await fetch(RSVP_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        mode: "cors"
+      }).catch(() => null);
+
+      if (jsonAttempt && jsonAttempt.ok) return { ok: true };
+
+      const formData = new URLSearchParams(payload);
+      const fallback = await fetch(RSVP_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+        body: formData,
+        mode: "cors"
+      }).catch(() => null);
+
+      if (fallback && fallback.ok) return { ok: true };
+
+      const noCorsAttempt = await fetch(RSVP_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+        body: formData,
+        mode: "no-cors"
+      }).then(() => ({ ok: true })).catch(() => null);
+
+      if (noCorsAttempt && noCorsAttempt.ok) return { ok: true };
+      return { ok: false, message: "Kayıt sırasında bağlantı hatası oluştu" };
+    }
+
+    rsvpButtons.forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const answer = btn.dataset.answer;
+
+        if (!rsvpForm.reportValidity()) {
+          return;
+        }
+
+        thanks.textContent = "Yanıtınız kaydediliyor...";
+        const payload = {
+          name: guestNameInput.value.trim(),
+          guestCount: guestCountInput.value,
+          answer,
+          createdAt: new Date().toISOString()
+        };
+
+        const result = await submitRSVP(payload);
+        if (answer === "Geliyorum") {
+          thanks.textContent = "Sizleri aramızda görmekten mutluluk duyacağız.";
+        } else {
+          thanks.textContent = "Cevabınız kaydedildi, teşekkür ederiz.";
+        }
+        launchConfetti();
+      });
+    });
+
+  </script>
+</body>
+</html>
